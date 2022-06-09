@@ -1,6 +1,36 @@
 import Head from 'next/head'
+import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import { createClient } from '@supabase/supabase-js' 
+
+export async function getStaticProps() {
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  )
+  const { data: categories } = await supabaseAdmin
+  .from('categories')
+  .select('*')
+  // let { data: planetDetails } = await supabaseAdmin
+  // .from('planetDetails') 
+  // .select('*')
+  // let { data: satelliteDetails} = await supabaseAdmin
+  // .from('satelliteDetails')
+  // .select('*')
+  // let { data: starDetails} = await supabaseAdmin
+  // .from('starDetails')
+  // .select('*')
+  console.log(categories)
+  return{
+    props: {
+      categories: "hello",
+      // planetDetails,
+      // satelliteDetails,
+      // starDetails
+    }
+  }
+}
 
 const StyledContainer = styled.div`
     height: 100vh;
@@ -48,18 +78,23 @@ const StyledLink = styled.a`
     text-transform: uppercase;
 `
 
-const Home = () => {
+const Home = ({ categories }) => {
+  console.log(categories)
   return (
     <>
+    {console.log(categories)}
     <Head>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
     </Head>
         <StyledContainer>
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
-                <Link href="/" passHref><StyledLink>Planety</StyledLink></Link>
+              {categories ? categories.map(category => {
+                <Link href={`/${category.name}`} passHref><StyledLink>{category.name}</StyledLink></Link>
+              }) : null}
+                
                 <Link href="/" passHref><StyledLink>Gwiazdy</StyledLink></Link>
                 <Link href="/" passHref><StyledLink>Satelity</StyledLink></Link>
             </StyledRow>
