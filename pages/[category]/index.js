@@ -44,7 +44,7 @@ export async function getStaticPaths() {
             const categoryName = category.name
             return {
                 params:{
-                    category: categoryName.toString(),
+                    category: categoryName.toString()
                 }          
             }
         }),

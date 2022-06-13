@@ -12,6 +12,10 @@ export async function getStaticProps() {
   const { data: categories } = await supabaseAdmin
   .from('categories')
   .select('*')
+  const { data: test} = await supabaseAdmin
+      .from('planets')
+      .select(`*, category (name)`)
+      console.log(test)
   return{
     props: {
       categories
