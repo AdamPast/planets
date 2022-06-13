@@ -12,26 +12,12 @@ export async function getStaticProps() {
   const { data: categories } = await supabaseAdmin
   .from('categories')
   .select('*')
-  // let { data: planetDetails } = await supabaseAdmin
-  // .from('planetDetails') 
-  // .select('*')
-  // let { data: satelliteDetails} = await supabaseAdmin
-  // .from('satelliteDetails')
-  // .select('*')
-  // let { data: starDetails} = await supabaseAdmin
-  // .from('starDetails')
-  // .select('*')
-  console.log(categories)
   return{
     props: {
-      categories: "hello",
-      // planetDetails,
-      // satelliteDetails,
-      // starDetails
+      categories
     }
   }
 }
-
 const StyledContainer = styled.div`
     height: 100vh;
     background: linear-gradient(132.22deg, #060672 -7.6%, #000000 100%);
@@ -51,7 +37,6 @@ const StyledH1 = styled.h1`
     color: #FFFFFF;
     text-shadow: 0px 7px 4px rgba(0, 0, 0, .25);
 `
-
 const StyledRow = styled.div`
     display: flex;
     align-items: center;
@@ -79,10 +64,8 @@ const StyledLink = styled.a`
 `
 
 const Home = ({ categories }) => {
-  console.log(categories)
   return (
     <>
-    {console.log(categories)}
     <Head>
       <link rel="preconnect" href="https://fonts.googleapis.com"/>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -91,12 +74,9 @@ const Home = ({ categories }) => {
         <StyledContainer>
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
-              {categories ? categories.map(category => {
-                <Link href={`/${category.name}`} passHref><StyledLink>{category.name}</StyledLink></Link>
+              {categories ? categories.map((category) => {
+                return <Link href={`${category.name}`} passHref key={category.id}><StyledLink>{category.name}</StyledLink></Link>
               }) : null}
-                
-                <Link href="/" passHref><StyledLink>Gwiazdy</StyledLink></Link>
-                <Link href="/" passHref><StyledLink>Satelity</StyledLink></Link>
             </StyledRow>
         </StyledContainer>
     </>
