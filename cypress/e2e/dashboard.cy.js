@@ -1,21 +1,21 @@
-describe('dashboard test', () =>{
+describe('dashboard tests', () =>{
     beforeEach(() =>{
         cy.visit("http://localhost:3000/")
     })
 
     it('should display Title', () =>{
-        cy.get('.pages__StyledH1-sc-bdbc25da-1')
+        cy.get('h1')
         .contains('Kosmiczna encyklopedia układu słonecznego 🚀')
     })
 
     it('Should display three main categories', () =>{
-        cy.get('.pages__StyledRow-sc-bdbc25da-2')
+        cy.get('div > div')
         .find('a')
         .should('be.visible')
     })
 
     it('should have expected text', () =>{
-        cy.get('.pages__StyledRow-sc-bdbc25da-2')
+        cy.get('div > div')
         .find('a')
         .should(($a) => {
             const text = $a.map((i, el) => Cypress.$(el).text())
