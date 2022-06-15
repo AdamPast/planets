@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { createClient } from '@supabase/supabase-js'
 
 const Category = ({ content }) => {
-    console.log(content)
     return (
         <div>
-            
+        {content.map(data => {
+           return <p key={data.id}>{data.name}</p>
+        })}
         </div>
     )
 }
@@ -21,7 +22,7 @@ export async function getStaticProps({ params }){
       const { data: data } = await supabaseAdmin
       .from(`${params.category}`) 
       .select('*')
-      console.log(data)
+
     return{
         props:{
             content: data

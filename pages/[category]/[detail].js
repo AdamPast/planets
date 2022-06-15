@@ -1,12 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { createClient } from '@supabase/supabase-js'
+import { supabaseAdmin } from '../../utils/supabase'
 
 const Detail = ({ content }) => {
-    console.log(content)
     return (
-        <div>
-            
+        <div>         
+            <p>{content.name} asdasd</p>
         </div>
     )
 }
@@ -14,76 +13,55 @@ const Detail = ({ content }) => {
 export default Detail
 
 export async function getStaticProps({ params }){
-    const supabaseAdmin = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-        process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-      )
+      console.log(params)
       const { data: data } = await supabaseAdmin
       .from(`${params.category}`) 
-      .select('*')
+      .select(`*`)
+      .ilike('name', `${params.detail}`)
+      .single()
 
-      
     return{
-        props:{
-            content: params
+        props: {
+            content: data
         }
     }
 }
 
 export async function getStaticPaths({content}) {
-    console.log(content)
-    const supabaseAdmin = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-    )
-        const { data: categories } = await supabaseAdmin
-        .from('categories')
-        .select('name')
-        const { data: planets } = await supabaseAdmin
-        .from('planets')
-        .select(`*, category (name)`)
-        const { data: stars } = await supabaseAdmin
-        .from('stars')
-        .select(`*, category (name)`)
-        const { data: satellites } = await supabaseAdmin
-        .from('satellites')
-        .select(`*, category (name)`)
 
-            const paths = planets.map(data => {
-            const itemName = data.name.toString().toLowerCase()
-            const itemCategory = data.category.name.toString().toLowerCase()
-            return{
-                params:{
-                    category: itemCategory,
-                    detail: itemName
-                }
-            }
-        })   
-        // paths[1] = stars.map(data => {
-        //     const itemName = data.name.toString().toLowerCase()
-        //     const itemCategory = data.category.name.toString().toLowerCase()
-        //     return{
-        //         params:{
-        //             category: itemCategory,
-        //             detail: itemName
-        //         }
-        //     }
-        // })
-        // paths[2] = satellites.map(data => {
-        //     const itemName = data.name.toString().toLowerCase()
-        //     const itemCategory = data.category.name.toString().toLowerCase()
-        //     return{
-        //         params:{
-        //             category: itemCategory,
-        //             detail: itemName
-        //         }
-        //     }
-        // })     
-
-
-            
+        const getAll = async () => {
+            const { data: planets } = await supabaseAdmin
+            .from('planets')
+            .select(`name, category (name)`)
+            const { data: stars } = await supabaseAdmin
+            .from('stars')
+            .select(`name, category (name)`)
+            const { data: satellites } = await supabaseAdmin
+            .from('satellites')
+            .select(`name, category (name)`)
+            return [planets,stars,satellites]
+        }
+            const data = await getAll();
+            const paths = data.map(data => {
+                return data.map(data => {
+                    const itemName = data.name.toString().toLowerCase();
+                    const itemCategory = data.category.name.toString().toLowerCase()
+                    return{
+                        params: {
+                            category: itemCategory,
+                            detail: itemName
+                        }
+                    }
+                })
+            })
+            let arr = []
+            paths.map(paths => {
+                paths.map(paths => {
+                    arr.push(paths)
+                })
+            })
     return {
-        paths: paths,
+        paths: arr,
         fallback: false
     }
    
