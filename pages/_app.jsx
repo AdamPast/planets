@@ -1,10 +1,9 @@
-import Home from '.'
 import '../styles/globals.css'
 
-function MyApp() {
+function MyApp({Component, pageProps}) {
   return (
     <div>
-      <Home/>
+      <Component {...pageProps}/>
     </div>
   )
 }

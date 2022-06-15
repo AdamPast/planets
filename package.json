@@ -3,9 +3,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "cypress": "cypress open"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.3",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -16,6 +18,7 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.7",
+    "cypress": "^10.1.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24",
     "typescript": "4.7.2"
