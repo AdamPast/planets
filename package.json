@@ -4,7 +4,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "cypress:open": "cypress open"
     "cypress": "cypress open"
+
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.3",
