@@ -1,7 +1,27 @@
 import Head from 'next/head'
+import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import { createClient } from '@supabase/supabase-js' 
 
+export async function getStaticProps() {
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  )
+  const { data: categories } = await supabaseAdmin
+  .from('categories')
+  .select('*')
+  const { data: test} = await supabaseAdmin
+      .from('planets')
+      .select(`*, category (name)`)
+      console.log(test)
+  return{
+    props: {
+      categories
+    }
+  }
+}
 const StyledContainer = styled.div`
     height: 100vh;
     background: linear-gradient(132.22deg, #060672 -7.6%, #000000 100%);
@@ -21,7 +41,6 @@ const StyledH1 = styled.h1`
     color: #FFFFFF;
     text-shadow: 0px 7px 4px rgba(0, 0, 0, .25);
 `
-
 const StyledRow = styled.div`
     display: flex;
     align-items: center;
@@ -48,20 +67,18 @@ const StyledLink = styled.a`
     text-transform: uppercase;
 `
 
-const Home = () => {
+const Home = ({ categories }) => {
   return (
     <>
     <Head>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+    
     </Head>
         <StyledContainer>
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
-                <Link href="/" passHref><StyledLink>Planety</StyledLink></Link>
-                <Link href="/" passHref><StyledLink>Gwiazdy</StyledLink></Link>
-                <Link href="/" passHref><StyledLink>Satelity</StyledLink></Link>
+              {categories ? categories.map((category) => {
+                return <Link href={`${category.name}`} passHref key={category.id}><StyledLink>{category.name}</StyledLink></Link>
+              }) : null}
             </StyledRow>
         </StyledContainer>
     </>
