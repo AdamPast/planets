@@ -27,8 +27,8 @@ describe('Category of satellites tests', () =>{
 
     it('should verify the correct name of all the satellites in the correct order', () =>{
         for(let i = 0; i < satellites.length; i++){
-            cy.get('div > div')
-            .find('p').eq(i)
+            cy.get('div > p')
+            .eq(i)
             .should(($p) =>{
                 expect($p).to.have.text(satellites[i])
             })
