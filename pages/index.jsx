@@ -77,7 +77,7 @@ const Home = ({ categories }) => {
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
               {categories ? categories.map((category) => {
-                return <Link href={`${category.name}`} passHref key={category.id}><StyledLink>{category.name}</StyledLink></Link>
+                return <Link href={`${category.name}`} passHref key={category.id}><StyledLink>{category.displayname}</StyledLink></Link>
               }) : null}
             </StyledRow>
         </StyledContainer>
