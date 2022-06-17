@@ -24,7 +24,6 @@ export async function getStaticProps() {
 }
 const StyledContainer = styled.div`
     height: 100vh;
-    background: linear-gradient(132.22deg, #060672 -7.6%, #000000 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,15 +70,13 @@ const Home = ({ categories }) => {
   return (
     <>
     <Head>
-      <link rel="preconnect" href="https://fonts.googleapis.com"/>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+    
     </Head>
         <StyledContainer>
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
               {categories ? categories.map((category) => {
-                return <Link href={`${category.name}`} passHref key={category.id}><StyledLink>{category.name}</StyledLink></Link>
+                return <Link href={`/${category.name}`} passHref key={category.id}><StyledLink>{category.displayname}</StyledLink></Link>
               }) : null}
             </StyledRow>
         </StyledContainer>

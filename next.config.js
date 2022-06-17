@@ -3,4 +3,7 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
+  images:{
+    domains: ['fldlgwmvbdlngqmznhpj.supabase.co'],
+  },
 }
