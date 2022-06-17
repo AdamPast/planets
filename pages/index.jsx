@@ -24,7 +24,6 @@ export async function getStaticProps() {
 }
 const StyledContainer = styled.div`
     height: 100vh;
-    background: linear-gradient(132.22deg, #060672 -7.6%, #000000 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +76,7 @@ const Home = ({ categories }) => {
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
               {categories ? categories.map((category) => {
-                return <Link href={`${category.name}`} passHref key={category.id}><StyledLink>{category.displayname}</StyledLink></Link>
+                return <Link href={`/${category.name}`} passHref key={category.id}><StyledLink>{category.displayname}</StyledLink></Link>
               }) : null}
             </StyledRow>
         </StyledContainer>

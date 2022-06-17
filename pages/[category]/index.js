@@ -93,18 +93,18 @@ const StyledHome = styled.div`
 
 `
 
-const Category = ({ content, category }) => {
+const Category = ({ content, category, categoryName }) => {
     console.log(category);
     return (
         <StyledContainer>
         <StyledHeader>
             <Link href="/" passHref><StyledLink>← Powrót</StyledLink></Link>
-            <StyledTitle>{category}</StyledTitle>
+            <StyledTitle>{categoryName}</StyledTitle>
             <StyledHome></StyledHome>
         </StyledHeader>
         <StyledRow>
         {content.map(data => {
-           return <Link href={`${category}/${data.name.toLowerCase()}`} passHref><a><StyledItem key={data.id}><StyledItemTitle>{data.name}</StyledItemTitle>
+           return <Link href={`${category}/${data.name.toLowerCase()}`} passHref key={data.id}><a><StyledItem><StyledItemTitle>{data.name}</StyledItemTitle>
            <StyledImage
                 alt={data.name}
                 src={data.image}
@@ -129,11 +129,17 @@ export async function getStaticProps({ params }){
       const { data: data } = await supabaseAdmin
       .from(`${params.category}`) 
       .select('*')
-
+      
+      const { data: category } = await supabaseAdmin
+      .from('categories')
+      .select('*')
+      .ilike(`name`, `${params.category}`)
+       const categoryName = category[0].displayname
     return{
         props:{
             category: params.category,
-            content: data
+            content: data,
+            categoryName: categoryName
         }
     }
 }
