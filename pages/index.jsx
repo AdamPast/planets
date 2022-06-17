@@ -27,10 +27,10 @@ const StyledContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 `
 const StyledH1 = styled.h1`
     display: block;
-    position: absolute;
     left: 127px;
     top: 74px;
     font-style: normal;
@@ -39,13 +39,23 @@ const StyledH1 = styled.h1`
     line-height: 63px;
     color: #FFFFFF;
     text-shadow: 0px 7px 4px rgba(0, 0, 0, .25);
+    flex: 0;
+    @media (max-width: 1024px){
+        font-size: 40px;
+        text-align: center;
+    }
 `
 const StyledRow = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 80%;
     margin: 0 120px;
+    flex: 1;
+    @media (max-width: 1024px){
+        flex-direction: column;
+        justify-content: center;
+    }
 `
 const StyledLink = styled.a`
     opacity: 0.88;
@@ -64,6 +74,14 @@ const StyledLink = styled.a`
     font-size: 48px;
     font-weight: 700;
     text-transform: uppercase;
+
+    @media (max-width: 1024px){
+        font-size: 30px;
+        border: 5px solid #888888;
+        width: 300px;
+        height: 100px;
+        margin: 20px 0;
+    }
 `
 
 const Home = ({ categories }) => {
