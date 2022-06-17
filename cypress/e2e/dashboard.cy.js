@@ -22,9 +22,9 @@ describe('dashboard tests', () =>{
             const a = text.get()
             expect(a, 'has 3 a links').to.have.length(3)
             expect(a, 'has expected text in each a link').to.deep.eq([
-              'Planety',
-              'Gwiazdy',
-              'Satelity',
+              'planety',
+              'satelity',
+              'gwiazdy',
             ])
           })
     })
