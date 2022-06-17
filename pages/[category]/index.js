@@ -32,6 +32,7 @@ const StyledRow = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: row;
     & > a{
         display: block;
         text-decoration: none;
