@@ -23,8 +23,7 @@ describe('Category of satellites tests', () =>{
     })
 
     it('should verify the correct name of the star', () =>{
-            cy.get('div > div')
-            .find('p').eq(0)
+            cy.get('div > p')
             .should(($p) =>{
                 expect($p).to.have.text('Słońce')
             })

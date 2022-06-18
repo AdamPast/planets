@@ -90,7 +90,6 @@ const StyledHome = styled.div`
 `;
 
 const Category = ({ content, category, categoryName }) => {
-  console.log(category);
   return (
     <StyledContainer>
       <StyledHeader>

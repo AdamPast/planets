@@ -86,7 +86,6 @@ const StyledListItem = styled.li`
 `;
 
 const Detail = ({ content }) => {
-  console.log(content);
   const detailsInfo = [
     {
       name: 'Nazwa',
