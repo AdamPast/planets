@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js';
 import styled from 'styled-components';
 import Link from 'next/link';

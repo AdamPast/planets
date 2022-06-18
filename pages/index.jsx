@@ -14,7 +14,6 @@ export async function getStaticProps() {
   const { data: test} = await supabaseAdmin
       .from('planets')
       .select(`*, category (name)`)
-      console.log(test)
   return{
     props: {
       categories
