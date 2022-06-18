@@ -86,7 +86,6 @@ const StyledListItem = styled.li`
 `;
 
 const Detail = ({ content }) => {
-  console.log(content);
   const detailsInfo = [
     {
       name: 'Nazwa',
@@ -165,7 +164,6 @@ const Detail = ({ content }) => {
 export default Detail;
 
 export async function getStaticProps({ params }) {
-  console.log(params);
   const { data: data } = await supabaseAdmin
     .from(`${params.category}`)
     .select(`*, category (name, displayname)`)
