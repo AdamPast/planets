@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
@@ -87,9 +86,6 @@ const StyledLink = styled.a`
 const Home = ({ categories }) => {
   return (
     <>
-    <Head>
-    
-    </Head>
         <StyledContainer>
             <StyledH1>Kosmiczna encyklopedia układu słonecznego 🚀</StyledH1>
             <StyledRow>
